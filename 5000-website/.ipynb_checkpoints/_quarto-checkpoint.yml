@@ -1,0 +1,40 @@
+project:
+  type: website
+
+website:
+  title: "DSAN-5000: Project"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about_me.ipynb
+        text: About Me
+      - href: https://github.com/anly501/dsan-5000-project-shawnhxu
+        text: Code
+      - href: https://github.com/anly501/dsan-5000-project-shawnhxu #linking to github assignment for now
+        text: Data
+      - href: introduction.ipynb
+        text: Introduction
+      - href: data_gathering.ipynb
+        text: Data Gathering
+      - href: data_cleaning.ipynb
+        text: Data Cleaning
+      - href: eda.ipynb
+        text: Data Exploration
+      - href: clustering.ipynb
+        text: Clustering
+      - href: dim_red.ipynb
+        text: Dimensionality Reduction
+      - href: decision_tree.ipynb
+        text: Decision Trees
+      - href: arm.ipynb
+        text: ARM
+      - href: conclusion.ipynb
+        text: Conclusions
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+
+

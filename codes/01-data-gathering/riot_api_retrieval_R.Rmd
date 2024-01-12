@@ -1,0 +1,115 @@
+---
+title: "Getting LoL Challengers Dataset"
+author: "Shawn Xu"
+date: "2023-09-28"
+output: html_document
+---
+```{r packages}
+#load packages needed
+suppressPackageStartupMessages(suppressWarnings(library(readr)))
+suppressPackageStartupMessages(suppressWarnings(library(httr)))
+suppressPackageStartupMessages(suppressWarnings(library(jsonlite)))
+```
+
+
+
+```{r functions}
+#variables needed in requesting API
+delimiter <- "?api_key="
+delimiter2 <- "&api_key="
+
+#function to access riot's api
+#key must be updated whenever it expires
+riot_api_fetching <- function(x) {
+  key <- "RGAPI-c72d1ead-c96e-4700-9ebf-d4818225407c"
+  url <- paste0(x, key)
+  json <- GET(url = url)
+  raw <- rawToChar(json$content)
+  fromJSON(raw)
+}
+```
+
+
+
+```{r challengers}
+#get top 300 players in North America for League of Legends
+challengers <- riot_api_fetching(
+    paste0("https://na1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5", delimiter))
+```
+
+
+
+```{r get_match_data}
+#initialize empty dataframe for data storage: chall_match_data
+column_names <- c('win','kills','deaths','dmgObj','dmgTurr','vision_score','totalDmg','totalDmgTaken','totalMinions','gold','position','time')
+column_types <- c("logical", "integer", "integer", "integer","integer","integer","integer","integer","integer","integer","character","numeric")
+# Initialize an empty dataframe with set columns
+chall_match_data <- data.frame(matrix(ncol = length(column_names), nrow = 0))
+colnames(chall_match_data) <- column_names
+# Set column data types
+chall_match_data <- as.data.frame(lapply(chall_match_data, function(x) type.convert(x, col = column_types)))
+
+
+#get puuid of each player in challenger
+#then get recent 10 matches from each player
+#filter out only the matches that are ranked solo queue 5v5 (queueId == 420)
+#get match data win(true/false), kills, deaths, 
+#damageDealtToObjectives,  damageDealtToTurrets, visionScorePerMinute,
+#totalDamageDealt, totalDamageTaken, totalMinionsKilled, 
+#goldEarned, individualPosition, time in minutes)
+for (summoner in challengers$entries$summonerId){
+   player <- riot_api_fetching(paste0("https://na1.api.riotgames.com/lol/summoner/v4/summoners/", summoner, delimiter))
+   puuid <- player$puuid
+   matches_10 <- riot_api_fetching(paste0('https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/', puuid, '/ids?start=0&count=10', delimiter2))
+   for (match in matches_10){
+     match_data <- riot_api_fetching(paste0('https://americas.api.riotgames.com/lol/match/v5/matches/', match, delimiter))
+     tryCatch(
+       expr = {
+         if (match_data$info$queueId == 420){
+         #get all relevant  match data
+         win <- match_data$info$participants$win
+         kills <- match_data$info$participants$kills
+         deaths <- match_data$info$participants$deaths
+         dmgObj <- match_data$info$participants$damageDealtToObjectives
+         dmgTurr <- match_data$info$participants$damageDealtToTurrets
+         vision_score <- match_data$info$participants$visionScore
+         totalDmg <- match_data$info$participants$totalDamageDealt
+         totalDmgTaken <- match_data$info$participants$totalDamageTaken
+         totalMinions <- match_data$info$participants$totalMinionsKilled
+         gold <- match_data$info$participants$goldEarned
+         position <- match_data$info$participants$individualPosition
+         time <- match_data$info$gameDuration/60
+         #put all data into a df before adding to empty dataframe
+         new_data <- data.frame(win, kills, deaths,  dmgObj, dmgTurr, vision_score, totalDmg, totalDmgTaken, totalMinions, gold, position, time)
+         
+         #rbind into empty dataframe to store data
+         chall_match_data <- rbind(chall_match_data, new_data)
+        }
+       },
+       error = function(err) {
+      cat("An error occurred")
+      return(NA)  # or any other value you want to return in case of an error
+    }
+       
+     )
+   }
+}
+
+
+
+```
+
+
+```{r csv}
+#write the final data frame into a .csv file
+write.csv(chall_match_data, "league_chall.csv", row.names = FALSE)
+
+```
+
+
+
+
+
+
+
+

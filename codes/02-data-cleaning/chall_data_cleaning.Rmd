@@ -1,0 +1,48 @@
+---
+title: "League Challenger Raw Data Cleaning"
+author: "Shawn Xu"
+date: "2023-10-11"
+output: html_document
+---
+```{r packages}
+#packages
+suppressPackageStartupMessages(suppressWarnings(library(tidyverse)))
+```
+
+
+```{r import_chall_data}
+#load in challenger data .csv
+chall_data <- read.csv("../../data/raw-riot-data/league data/league_chall.csv")
+```
+
+```{r clean}
+#lowercase all the values in 'position' column
+chall_data$position <- tolower(chall_data$position)
+
+#using logical index, keep all rows that don't have 'invalid' in 'position' column
+chall_data <- chall_data[!chall_data$position == 'invalid',]
+
+#add a column called 'rank' and put 'challenger' in each row
+chall_data$rank <- 'challenger'
+
+```
+
+```{r combine}
+#combine with other combined data set
+#import combined data set
+combined <- read.csv("../../data/cleaned_riot_data/league_combined_cleaned.csv")
+
+#combine both data frames with rbind()
+combined_chall <- rbind(combined, chall_data)
+
+```
+
+```{r csv}
+#write combined_chall and chall_data into .csv files
+write.csv(combined_chall, "league_combined_with_chall_cleaned.csv", row.names = FALSE)
+write.csv(chall_data, "chall_data_cleaned.csv", row.names = FALSE)
+
+```
+
+
+
