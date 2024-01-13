@@ -1,0 +1,58 @@
+project:
+  type: website
+
+format:
+  html:
+    theme:
+      dark: darkly
+    mainfont: arial
+    fontsize: 18px
+    monofont: courier new
+    toc: true
+
+
+website:
+  title: "Skill Based Matchmaking Player Rank Analysis"
+  sidebar:
+    style: floating
+    background: grey
+    contents:
+      - href: index.qmd
+        text: Home Page
+      - section: "Introduction"
+        contents:
+          - href: about_me/about_me.ipynb
+            text: About Me
+          - href: code.ipynb
+            text: Code
+          - href: data.ipynb
+            text: Data
+          - href: introduction.ipynb
+            text: Introduction
+      - section: "Data Preparation"
+        contents:
+          - href: data_gathering.ipynb
+            text: Data Gathering
+          - href: data_cleaning.ipynb
+            text: Data Cleaning
+          - href: eda.ipynb
+            text: Data Exploration
+      - section: "Techniques"
+        contents:
+          - href: naive_bayes.ipynb
+            text: Naive Bayes
+          - href: dim_red.ipynb
+            text: Dimensionality Reduction
+          - href: clustering.ipynb
+            text: Clustering
+          - href: decision_tree.ipynb
+            text: Decision Tree and RF
+      - section: "Conclusion"
+        contents:
+          - href: conclusion.ipynb
+            text: Conclusions 
+
+
+
+
+

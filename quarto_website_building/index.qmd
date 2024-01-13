@@ -1,0 +1,44 @@
+---
+title: "Home Page"
+author: "Shawn Xu"
+format:
+  html:
+    embed-resources: true
+---
+
+<span style="font-size: 38px;">Player Rank Analysis Final Project</span>
+
+![Image [Source](https://www.mnp.ca/en/insights/directory/a-day-in-the-life-of-an-esports-gamer)](images/homepage.jpg)
+
+In this website I will go through my project of investigating how certain players' skill rating are determined based on in-game match data. Due to the limited amount of available player data for competitive video games, I will only examine the mainstream competitive video game: *League of Legends*.
+
+
+### Project Organization
+
+##### <ins>Introduction:</ins>
+For the introduction I wanted to give some contextual information about me as well as the idea that I had for this Data Science project. This section contains an intro about me, an intro about my project, the data that I used, and the code that I made. 
+
+- [About Me](https://shawnhxu.github.io/EnhancingSBMM/about_me/about_me.html)
+- [Code](https://shawnhxu.github.io/EnhancingSBMM/code.html)
+- [Data](https://shawnhxu.github.io/EnhancingSBMM/data.html)
+- [Introduction](https://shawnhxu.github.io/EnhancingSBMM/introduction.html)
+
+##### <ins>Data Preparation:</ins>
+For the Data Preparation section, I worked on retrieving textual and record data from the Riot API. More information can be found in the following tabs.
+
+- [Data Gathering](https://shawnhxu.github.io/EnhancingSBMM/data_gathering.html)
+- [Data Cleaning](https://shawnhxu.github.io/EnhancingSBMM/data_cleaning.html)
+- [Data Exploration](https://shawnhxu.github.io/EnhancingSBMM/eda.html)
+
+##### <ins>Techniques:</ins>
+Here lists some of techniques that I used on my retrieved data. Namely, I used Naive Bayes classification, Dimensionality Reduction, Clustering, and some Decision Tree classification techniques. 
+
+- [Naive Bayes](https://shawnhxu.github.io/EnhancingSBMM/naive_bayes.html)
+- [Dimensionality Reduction](https://shawnhxu.github.io/EnhancingSBMM/dim_red.html)
+- [Clustering](https://shawnhxu.github.io/EnhancingSBMM/clustering.html)
+- [Decision Trees](https://shawnhxu.github.io/EnhancingSBMM/decision_tree.html)
+  
+##### <ins>Conclusion:</ins>
+A small concluding segment where I talk about my findings and how it relates back to my project idea.
+
+- [Conclusions](https://shawnhxu.github.io/EnhancingSBMM/conclusion.html)
