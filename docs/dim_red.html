@@ -4615,7 +4615,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./decision_tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Decision Trees</span></a>
+ <span class="menu-text">Decision Tree and RF</span></a>
   </div>
 </li>
       </ul>
@@ -4693,8 +4693,8 @@ vertical-align: -.125em;
 </section>
 <section id="dimensionality-reduction-results-with-pca" class="level2">
 <h2 class="anchored" data-anchor-id="dimensionality-reduction-results-with-pca">Dimensionality Reduction Results with PCA</h2>
-<p>The cleaned data I used: <a href="https://github.com/anly501/dsan-5000-project-shawnhxu/blob/main/data/cleaned_riot_data/league_combined_with_chall_cleaned.csv">Retrieved Match Data from Riot API</a></p>
-<p>The code for performing PCA: <a href="https://github.com/anly501/dsan-5000-project-shawnhxu/blob/main/codes/05-dim-red/pca.ipynb">PCA Code</a></p>
+<p>The cleaned data I used: <a href="https://github.com/shawnhxu/EnhancingSBMM/blob/main/data/02-cleaned_riot_data/league_combined_with_chall_cleaned.csv">Retrieved Match Data from Riot API</a></p>
+<p>The code for performing PCA: <a href="https://github.com/shawnhxu/EnhancingSBMM/blob/main/codes/05-dim-red/pca.ipynb">PCA Code</a></p>
 <p><strong>PCA Process</strong> <br> A process of feature extraction where all of the information being used is retained was done on the record data that I retrieved from the Riot API. Firstly, I did some cleaning again to normalize the record data as all features were time-dependent. I also removed the non-numerical variables so that PCA can be done properly. In hindsight, I could have encoded the categorical variables as numerics but I did also want to compare what I found from PCA with what I concluded in Feature Selection so I went with the original time-dependent features. <br><br></p>
 <p>Next, I used <code>Scikit-Learn</code>’s function to fit then transform the dataset to create multiple principal components. These principal components basically contained all information about each feature in some way. The features were combined in some linear fashion to result in a principal component. These transformations were done multiple times to create multiple principal components (created the same number of PC’s as the number of features). After creating multiple principal components, they were sorted from highest variance of transformed data points to lowest variance. The first component now having the highest variance, the second component having the second highest variance, and so on. <br><br></p>
 <div class="cell">
@@ -4835,7 +4835,7 @@ vertical-align: -.125em;
 </section>
 <section id="dimensionality-reduction-results-with-t-sne" class="level2">
 <h2 class="anchored" data-anchor-id="dimensionality-reduction-results-with-t-sne">Dimensionality Reduction Results with t-SNE</h2>
-<p>The code for performing t-SNE: <a href="https://github.com/anly501/dsan-5000-project-shawnhxu/blob/main/codes/05-dim-red/tSNE.ipynb">t-SNE Code</a></p>
+<p>The code for performing t-SNE: <a href="https://github.com/shawnhxu/EnhancingSBMM/blob/main/codes/05-dim-red/tSNE.ipynb">t-SNE Code</a></p>
 <p><strong>Visualizing t-SNE Distribution</strong> <br> Using <code>Scikit-Learn</code>’s library for a t-SNE function, I was able to conveniently transform and fit my record data into a 2-dimensional non-linear version. The idea behind t-SNE is to put more emphasis on data points from the original dataset that are very similar to each other. This is done by measuring two data points similarity through measurements like the Euclidean distance formula. It then compares each data point with all other data points from the original dataset to represent the similarity between points. The model would then adjust the distribution to emphasize similar data points. The t-SNE process then iterates through multiple configurations of points in a low-dimensional space that would best preserve the discovered pairwise similarities of data points found in the higher-dimensional space. <br> <br></p>
 <p>Another point that should be mentioned with t-SNE is the tuning of the perplexity parameter. With a lower perplexity, the distribution of points follows more heavily with the data points from the original dataset that are close to each other. This is known as following the patterns of the “local” structure. As you go higher in perplexity, the distribution follows more of the “global” structure which means the relationships/patterns of the points that are farther apart in the original dataset are considered more and more. Using a perplexity of somewhere in the middle will help show the relationship of the points while illustrating both the local and global relationships of the original dataset. <br> <br></p>
 <p>To visualize this, I chose to generate a 2-dimensional transformation of the original dataset with t-SNE and plotted the dimensions against each other with varying perplexity parameter values: <br></p>

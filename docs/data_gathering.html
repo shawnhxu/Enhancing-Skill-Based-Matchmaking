@@ -4615,7 +4615,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./decision_tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Decision Trees</span></a>
+ <span class="menu-text">Decision Tree and RF</span></a>
   </div>
 </li>
       </ul>
@@ -4675,7 +4675,7 @@ vertical-align: -.125em;
 
 <section id="links-to-source-code-and-api-used" class="level3">
 <h3 class="anchored" data-anchor-id="links-to-source-code-and-api-used">Links to source code and API used</h3>
-<p>Link to the source of retrieval code: <a href="https://github.com/anly501/dsan-5000-project-shawnhxu/tree/main/codes/01-data-gathering">Source Code</a></p>
+<p>Link to the source of retrieval code: <a href="https://github.com/shawnhxu/EnhancingSBMM/tree/main/codes/01-data-gathering">Source Code</a></p>
 <p>Link to Riot’s APIs: <a href="https://developer.riotgames.com/apis">Riot API</a></p>
 </section>
 <section id="introduction-of-data-source" class="level2">
@@ -4872,12 +4872,12 @@ vertical-align: -.125em;
 </details>
 </div>
 <p>After retrieving and storing it in data frames in my code, the only thing left is to write the data frames into csv excel files. After doing that, I am left with 7 different data sets from this process which is one excel file for each respective rank division at tier II.</p>
-<p>I did another process after this later for text data. I used the same exact process but this time only extracting individual player positions they are playing in the match and also their champion (fictional character within the game) that they chose. This text data will later be used for classification. This can be found in the <a href="https://github.com/anly501/dsan-5000-project-shawnhxu/tree/main/data/01-raw-riot-data">data folder</a> as well labeled with ‘text data’. <br></p>
+<p>I did another process after this later for text data. I used the same exact process but this time only extracting individual player positions they are playing in the match and also their champion (fictional character within the game) that they chose. This text data will later be used for classification. This can be found in the <a href="https://github.com/shawnhxu/EnhancingSBMM/tree/main/data/01-raw-riot-data">data folder</a> as well labeled with ‘text data’. <br></p>
 <p><strong>Challenger Data Set in R</strong> <br><br> Now that I have this process of acquiring data sets, I decided to retrieve more data through R from the same API but using different functions. The main difference this time is that I am looking for data from extremely high ranked players in League of Legends.</p>
 <p>So how this works is that after the rank division <code>&quot;Diamond&quot;</code>, there are 3 more divisions that dynamically change based on the total sum of a player’s skill rating points. The points are determined by Riot’s Skill Rating algorithm. So after <code>&quot;Diamond&quot;</code> comes <code>&quot;Masters&quot;</code> then <code>&quot;Grandmaster&quot;</code> and finally <code>&quot;Challenger&quot;</code>. Each of those ranks don’t have tiers and are differentiated at dynamically changing skill rating points thresholds. For example, the threshold to become a <code>&quot;Challenger&quot;</code> in rank is to reach a total of <code>800 League Points</code> (hypothetically).</p>
 <p>Knowing that, I decided to retrieve more data on players for League of Legends but this time I will be inspecting the match data of the top 300 players on the leaderboard and their recent match data. This is possible because Riot API has a separate function specifically for players on the <code>&quot;Challenger&quot;</code> ranked ladder. And so using the same process as before for other players, I created a dataset filled with match data from the top 300 players in <u>North America</u> and their recent <code>&#39;Ranked Solo/Duo 5v5&#39;</code> matches. Again, filtering the matches with <code>queueId = 420</code> and storing the desired match data into a data frame. This time, everyone is ranked <code>&quot;Challenger&quot;</code> so I will not be labeling each match with the rank.</p>
 <p>So now, I have an additional data set in the form of a csv file for <code>&quot;Challenger&quot;</code> players.</p>
-<p>This was all done in R in the .rmd file which can be found <a href="https://github.com/anly501/dsan-5000-project-shawnhxu/blob/main/codes/01-data-gathering/riot_api_retrieval_R.Rmd">here</a>.</p>
+<p>This was all done in R in the .rmd file which can be found <a href="https://github.com/shawnhxu/EnhancingSBMM/blob/main/codes/01-data-gathering/riot_api_retrieval_R.Rmd">here</a>.</p>
 <p><strong>Text Data Set Retrieval (Python)</strong> <br></p>
 <p>In addition to the numerical record data that I retrieved, I also retrieved a simple text dataset from the Riot API as well. I followed the exact same process as I did with my Python code I showcased. The changes I made were made in the <code>player_data()</code> function where I extracted different categories of player data. Specifically, I extracted the <code>&#39;championName&#39;</code> and the <code>&#39;individualPosition&#39;</code> match data. <code>&#39;championName&#39;</code> is the fictional character being played by the player and <code>&#39;individualPosition&#39;</code> is the position that the player is playing in that specific match.</p>
 <p>Here is the altered code for <code>player_data()</code>:</p>
